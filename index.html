@@ -187,9 +187,12 @@
       }
       .page {
         display: none;
+        opacity: 0;
+        transform: translateY(12px);
       }
       .page.active {
         display: block;
+        animation: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
       .wrap {
         max-width: 900px;
@@ -213,6 +216,26 @@
         flex-direction: column;
         justify-content: center;
         padding: clamp(40px, 8vh, 80px) 0 clamp(32px, 6vh, 56px);
+      }
+      .page.active .hero > * {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .page.active .hero > *:nth-child(1) {
+        animation-delay: 0.04s;
+      }
+      .page.active .hero > *:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .page.active .hero > *:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .page.active .hero > *:nth-child(4) {
+        animation-delay: 0.28s;
+      }
+      .page.active .hero > *:nth-child(5) {
+        animation-delay: 0.36s;
       }
       .hero-eyebrow {
         font-family: var(--mono);
@@ -348,6 +371,50 @@
       }
       .sh-link:hover {
         color: var(--ac);
+      }
+      .page.active .sh,
+      .page.active .bento,
+      .page.active .about-grid,
+      .page.active .contact-row,
+      .page.active footer,
+      .page.active .blog-hero,
+      .page.active .blog-note,
+      .page.active .blog-toolbar,
+      .page.active .pagination,
+      .page.active .art-wrap {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .page.active .sh {
+        animation-delay: 0.04s;
+      }
+      .page.active .bento {
+        animation-delay: 0.1s;
+      }
+      .page.active .about-grid {
+        animation-delay: 0.16s;
+      }
+      .page.active .contact-row {
+        animation-delay: 0.22s;
+      }
+      .page.active footer {
+        animation-delay: 0.28s;
+      }
+      .page.active .blog-hero {
+        animation-delay: 0.04s;
+      }
+      .page.active .blog-note {
+        animation-delay: 0.1s;
+      }
+      .page.active .blog-toolbar {
+        animation-delay: 0.16s;
+      }
+      .page.active .pagination {
+        animation-delay: 0.22s;
+      }
+      .page.active .art-wrap {
+        animation-delay: 0.06s;
       }
 
       /* BENTO */
@@ -621,6 +688,10 @@
         display: flex;
         gap: clamp(10px, 2vw, 18px);
         align-items: flex-start;
+        opacity: 0;
+        transform: translateY(12px);
+        animation: rise-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: var(--delay, 0ms);
       }
       .post-card:hover {
         border-color: rgba(255, 255, 255, 0.13);
@@ -758,6 +829,30 @@
         }
         40% {
           transform: translateY(-8px);
+        }
+      }
+      @keyframes page-enter {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+          filter: blur(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+          filter: blur(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
         }
       }
       .ld-txt {
@@ -943,6 +1038,39 @@
         align-items: center;
         border-top: 1px solid var(--br);
         padding-top: 22px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .page,
+        .page.active,
+        .page.active .hero > *,
+        .page.active .sh,
+        .page.active .bento,
+        .page.active .about-grid,
+        .page.active .contact-row,
+        .page.active footer,
+        .page.active .blog-hero,
+        .page.active .blog-note,
+        .page.active .blog-toolbar,
+        .page.active .pagination,
+        .page.active .art-wrap,
+        .post-card {
+          opacity: 1;
+          transform: none;
+          filter: none;
+          animation: none !important;
+        }
       }
 
       /* RESPONSIVE */
@@ -1491,7 +1619,7 @@
                 .replace(/\n+/g, " ")
                 .trim()
                 .slice(0, 100) + "...";
-            return `<div class="post-card" onclick="openPost('${p.slug}')">
+            return `<div class="post-card" style="--delay:${i * 60}ms" onclick="openPost('${p.slug}')">
       <div class="post-idx">${String(idx).padStart(2, "0")}</div>
       <div class="post-main">
         <div class="post-row">
