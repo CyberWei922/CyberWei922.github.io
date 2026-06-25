@@ -1,0 +1,79 @@
+{
+  "updated_at": "2026-06-25T17:34:34Z",
+  "all_time": {
+    "distance_km": 7409.9,
+    "moving_time_h": 289.4,
+    "elevation_m": 29368,
+    "count": 268
+  },
+  "ytd": {
+    "distance_km": 2044.8,
+    "moving_time_h": 75.9,
+    "elevation_m": 8853,
+    "count": 57
+  },
+  "recent_4w": {
+    "distance_km": 456.9,
+    "count": 10
+  },
+  "biggest_ride_km": 205.4,
+  "recent_activities": [
+    {
+      "name": "傍晚骑行",
+      "date": "2026-06-24",
+      "distance_km": 66.0,
+      "moving_time_h": 2.0,
+      "elevation_m": 227,
+      "avg_speed_kmh": 32.4
+    },
+    {
+      "name": "傍晚骑行",
+      "date": "2026-06-17",
+      "distance_km": 42.7,
+      "moving_time_h": 1.3,
+      "elevation_m": 143,
+      "avg_speed_kmh": 33.0
+    },
+    {
+      "name": "Evening Ride",
+      "date": "2026-06-16",
+      "distance_km": 44.1,
+      "moving_time_h": 1.4,
+      "elevation_m": 148,
+      "avg_speed_kmh": 32.0
+    },
+    {
+      "name": "傍晚骑行",
+      "date": "2026-06-14",
+      "distance_km": 19.1,
+      "moving_time_h": 0.8,
+      "elevation_m": 47,
+      "avg_speed_kmh": 23.7
+    },
+    {
+      "name": "7.67kg",
+      "date": "2026-06-14",
+      "distance_km": 11.3,
+      "moving_time_h": 0.3,
+      "elevation_m": 13,
+      "avg_speed_kmh": 41.4
+    },
+    {
+      "name": "瑞克多车主团建",
+      "date": "2026-06-13",
+      "distance_km": 77.8,
+      "moving_time_h": 2.4,
+      "elevation_m": 539,
+      "avg_speed_kmh": 32.1
+    },
+    {
+      "name": "新车",
+      "date": "2026-06-12",
+      "distance_km": 60.4,
+      "moving_time_h": 2.1,
+      "elevation_m": 429,
+      "avg_speed_kmh": 28.3
+    }
+  ],
+  "strava_url": "https://www.strava.com/athletes/152238954"
+}
