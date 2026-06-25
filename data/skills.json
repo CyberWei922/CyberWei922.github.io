@@ -1,0 +1,74 @@
+{
+  "categories": [
+    {
+      "id": "frontend",
+      "label": "前端开发",
+      "icon": "◈",
+      "color": "blue",
+      "skills": [
+        { "name": "HTML",       "level": 4, "note": "熟练" },
+        { "name": "CSS",        "level": 4, "note": "熟练" },
+        { "name": "JavaScript", "level": 3, "note": "掌握" }
+      ]
+    },
+    {
+      "id": "languages",
+      "label": "编程语言",
+      "icon": "⌨",
+      "color": "teal",
+      "skills": [
+        { "name": "C",       "level": 3, "note": "掌握" },
+        { "name": "Python",  "level": 3, "note": "掌握" },
+        { "name": "Verilog", "level": 1, "note": "自学中" }
+      ]
+    },
+    {
+      "id": "linux",
+      "label": "Linux / 系统",
+      "icon": "▦",
+      "color": "amber",
+      "skills": [
+        { "name": "Ubuntu Server", "level": 4, "note": "熟练" },
+        { "name": "iptables / nftables", "level": 3, "note": "掌握" },
+        { "name": "分区 / 引导", "level": 3, "note": "掌握" },
+        { "name": "Shell 脚本",  "level": 3, "note": "掌握" },
+        { "name": "Docker",      "level": 2, "note": "了解" }
+      ]
+    },
+    {
+      "id": "network",
+      "label": "网络与路由",
+      "icon": "⬡",
+      "color": "purple",
+      "skills": [
+        { "name": "旁路由架构",   "level": 4, "note": "熟练" },
+        { "name": "透明代理",     "level": 4, "note": "熟练" },
+        { "name": "固件逆向",     "level": 3, "note": "掌握" },
+        { "name": "策略路由",     "level": 3, "note": "掌握" }
+      ]
+    },
+    {
+      "id": "android",
+      "label": "Android 底层",
+      "icon": "◎",
+      "color": "green",
+      "skills": [
+        { "name": "Magisk / KernelSU", "level": 5, "note": "精通" },
+        { "name": "LSPosed / Xposed",  "level": 4, "note": "熟练" },
+        { "name": "Fastboot / ADB",    "level": 4, "note": "熟练" },
+        { "name": "FCM 修复",          "level": 3, "note": "掌握" }
+      ]
+    },
+    {
+      "id": "hardware",
+      "label": "硬件 / EE",
+      "icon": "⚡",
+      "color": "coral",
+      "skills": [
+        { "name": "微电子专业课",     "level": 3, "note": "在学" },
+        { "name": "Verilog / FPGA",   "level": 1, "note": "自学中" },
+        { "name": "电赛备赛",         "level": 2, "note": "进行中" }
+      ]
+    }
+  ]
+}

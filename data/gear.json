@@ -1,0 +1,94 @@
+{
+  "categories": [
+    {
+      "label": "计算设备",
+      "items": [
+        {
+          "name": "MacBook Air M1",
+          "role": "主力开发机",
+          "desc": "日常写代码、前端开发、SSH 远程管理",
+          "icon": "💻",
+          "tags": ["主力", "开发"]
+        },
+        {
+          "name": "台式机 7800X3D + RTX 5060",
+          "role": "高性能工作站",
+          "desc": "AI 计算、高性能仿真、游戏",
+          "icon": "🖥",
+          "tags": ["AI", "高性能"]
+        },
+        {
+          "name": "HP T630（Watermelonpi）",
+          "role": "家用服务器",
+          "desc": "Ubuntu Server，旁路由、Docker 服务、24h 在线",
+          "icon": "🖧",
+          "tags": ["服务器", "Linux"]
+        }
+      ]
+    },
+    {
+      "label": "移动设备",
+      "items": [
+        {
+          "name": "iPhone 17",
+          "role": "主力手机",
+          "desc": "日常主力，iOS 生态",
+          "icon": "📱",
+          "tags": ["主力", "iOS"]
+        },
+        {
+          "name": "小米 13 Ultra",
+          "role": "徕卡摄影 / 研究机",
+          "desc": "BL 已解锁，部署 LSPosed / Magisk，同时作为徕卡光学主摄影机使用",
+          "icon": "📷",
+          "tags": ["摄影", "Android", "ROOT"]
+        },
+        {
+          "name": "Nothing Phone (2)",
+          "role": "谷歌生态 / 原生 Android",
+          "desc": "类原生系统体验，谷歌服务生态，KernelSU 研究平台",
+          "icon": "📲",
+          "tags": ["Android", "KernelSU"]
+        },
+        {
+          "name": "iPad mini 6",
+          "role": "笔记 / 阅读",
+          "desc": "课堂笔记、论文阅读、视频",
+          "icon": "📓",
+          "tags": ["笔记", "iOS"]
+        }
+      ]
+    },
+    {
+      "label": "网络设备",
+      "items": [
+        {
+          "name": "小米 BE3600",
+          "role": "主路由",
+          "desc": "固件已逆向，SSH 开启，ShellClash 透明代理部署",
+          "icon": "📡",
+          "tags": ["路由", "已魔改"]
+        }
+      ]
+    },
+    {
+      "label": "骑行装备",
+      "items": [
+        {
+          "name": "美利达 瑞克多 Team",
+          "role": "公路自行车",
+          "desc": "主力骑行坐骑，完成过合肥—芜湖 300km 长途",
+          "icon": "🚴",
+          "tags": ["骑行", "公路"]
+        },
+        {
+          "name": "佳明 Edge 540",
+          "role": "骑行码表",
+          "desc": "GPS 导航、功率数据记录、Strava 同步",
+          "icon": "🧭",
+          "tags": ["码表", "GPS"]
+        }
+      ]
+    }
+  ]
+}

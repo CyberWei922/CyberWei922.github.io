@@ -1,0 +1,109 @@
+name: Sync Strava Data
+
+on:
+  schedule:
+    - cron: '0 * * * *'   # 每天 UTC 02:00 = 北京时间 10:00
+  workflow_dispatch:        # 支持手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch and write strava.json
+        env:
+          CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+        run: |
+          python3 << 'PYEOF'
+          import json, datetime, urllib.request, urllib.parse, os
+
+          def post(url, data):
+              req = urllib.request.Request(url, urllib.parse.urlencode(data).encode())
+              with urllib.request.urlopen(req) as r:
+                  return json.loads(r.read())
+
+          def get(url, token):
+              req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}"})
+              with urllib.request.urlopen(req) as r:
+                  return json.loads(r.read())
+
+          def km(m):   return round((m or 0) / 1000, 1)
+          def hrs(s):  return round((s or 0) / 3600, 1)
+          def elev(e): return round(e or 0)
+
+          # 1. 换 access_token
+          token_data = post("https://www.strava.com/oauth/token", {
+              "client_id":     os.environ["CLIENT_ID"],
+              "client_secret": os.environ["CLIENT_SECRET"],
+              "refresh_token": os.environ["REFRESH_TOKEN"],
+              "grant_type":    "refresh_token",
+          })
+          access = token_data["access_token"]
+
+          # 2. 拉统计
+          stats = get("https://www.strava.com/api/v3/athletes/152238954/stats", access)
+
+          # 3. 拉最近活动
+          acts = get("https://www.strava.com/api/v3/athlete/activities?per_page=8", access)
+
+          # 4. 筛骑行活动
+          ride_types = {"Ride", "MountainBikeRide", "GravelRide", "VirtualRide", "EBikeRide"}
+          recent = []
+          for a in acts:
+              if a.get("sport_type") in ride_types:
+                  recent.append({
+                      "name":           a.get("name", ""),
+                      "date":           (a.get("start_date_local") or "")[:10],
+                      "distance_km":    km(a.get("distance", 0)),
+                      "moving_time_h":  hrs(a.get("moving_time", 0)),
+                      "elevation_m":    elev(a.get("total_elevation_gain", 0)),
+                      "avg_speed_kmh":  round((a.get("average_speed") or 0) * 3.6, 1),
+                  })
+
+          ar = stats.get("all_ride_totals", {})
+          yr = stats.get("ytd_ride_totals", {})
+          rr = stats.get("recent_ride_totals", {})
+
+          output = {
+              "updated_at":    datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+              "all_time": {
+                  "distance_km":   km(ar.get("distance")),
+                  "moving_time_h": hrs(ar.get("moving_time")),
+                  "elevation_m":   elev(ar.get("elevation_gain")),
+                  "count":         ar.get("count", 0),
+              },
+              "ytd": {
+                  "distance_km":   km(yr.get("distance")),
+                  "moving_time_h": hrs(yr.get("moving_time")),
+                  "elevation_m":   elev(yr.get("elevation_gain")),
+                  "count":         yr.get("count", 0),
+              },
+              "recent_4w": {
+                  "distance_km": km(rr.get("distance")),
+                  "count":       rr.get("count", 0),
+              },
+              "biggest_ride_km":   km(stats.get("biggest_ride_distance")),
+              "recent_activities": recent,
+              "strava_url":        "https://www.strava.com/athletes/152238954",
+          }
+
+          os.makedirs("data", exist_ok=True)
+          with open("data/strava.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("✓ data/strava.json written")
+          PYEOF
+
+      - name: Commit & push
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/strava.json
+          git diff --staged --quiet || git commit -m "chore: sync strava $(date -u +%Y-%m-%d)"
+          git push

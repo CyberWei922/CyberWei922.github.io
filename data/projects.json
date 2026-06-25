@@ -1,0 +1,30 @@
+[
+  {
+    "id": "strava-router",
+    "title": "小米 BE3600 固件逆向与 ShellClash 部署",
+    "tags": ["Linux", "网络", "固件逆向"],
+    "desc": "利用官方固件鉴权漏洞强制开启 SSH，在原生系统上部署 ShellClash，修改 iptables/nftables 实现全局透明代理，保留原厂 Wi-Fi 硬件加速。",
+    "date": "2024-10"
+  },
+  {
+    "id": "hp-t630-server",
+    "title": "HP T630 瘦客机服务器化与旁路由架构",
+    "tags": ["Linux", "网络", "服务器"],
+    "desc": "将低功耗 x86 瘦客机（Watermelonpi）部署为家用服务器，解决 UEFI 引导与多盘分区问题，调优旁路由网关架构消除流量环路，实现透明代理流控。",
+    "date": "2024-11"
+  },
+  {
+    "id": "android-root",
+    "title": "Android 底层魔改：Nothing OS / HyperOS 深度定制",
+    "tags": ["Android", "KernelSU", "LSPosed"],
+    "desc": "针对多设备（Nothing Phone 2、小米 13 Ultra）适配 KernelSU/Magisk Root，部署 LSPosed 框架，修复国内 FCM 推送断连问题，大幅提升续航与通知时效。",
+    "date": "2024-12"
+  },
+  {
+    "id": "web-tools",
+    "title": "高中自制网页工具集",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "desc": "高中自学前端三件套，为班级写了随机点名系统、晚自习倒计时时钟等工具，在实际场景中持续使用。",
+    "date": "2023-09"
+  }
+]
