@@ -1,0 +1,1673 @@
+<!doctype html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CyberWei</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap");
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #07090f;
+        --s1: #0c0f1a;
+        --s2: #111525;
+        --ac: #00d4aa;
+        --ac2: #3b9eff;
+        --ac3: #9b7bff;
+        --tx: #dce3f0;
+        --mt: #4e5f7a;
+        --fa: rgba(255, 255, 255, 0.04);
+        --br: rgba(255, 255, 255, 0.07);
+        --brac: rgba(0, 212, 170, 0.25);
+        --mono: "JetBrains Mono", monospace;
+        --sans: "Inter", sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--tx);
+        font-family: var(--sans);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(
+            ellipse 60% 40% at 15% 60%,
+            rgba(0, 212, 170, 0.055) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 50% 35% at 85% 25%,
+            rgba(59, 158, 255, 0.05) 0%,
+            transparent 70%
+          ),
+          linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.012) 1px,
+            transparent 1px
+          );
+        background-size:
+          100% 100%,
+          100% 100%,
+          36px 36px,
+          36px 36px;
+      }
+
+      /* LIQUID GLASS NAV */
+      .nav-shell {
+        position: fixed;
+        bottom: clamp(16px, 3vh, 28px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        padding: 5px 7px;
+        gap: 2px;
+        border-radius: 100px;
+        background: rgba(10, 14, 26, 0.6);
+        backdrop-filter: blur(40px) saturate(2) brightness(1.15);
+        -webkit-backdrop-filter: blur(40px) saturate(2) brightness(1.15);
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        box-shadow:
+          0 0 0 0.5px rgba(0, 0, 0, 0.5),
+          0 12px 40px rgba(0, 0, 0, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.14),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+        max-width: calc(100vw - 32px);
+      }
+      .nav-logo {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        padding: 6px 14px 6px 10px;
+        letter-spacing: 0.06em;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        cursor: pointer;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        margin-right: 2px;
+        flex-shrink: 0;
+      }
+      .logo-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ac);
+        flex-shrink: 0;
+        animation: glow 3s ease-in-out infinite;
+      }
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow:
+            0 0 4px var(--ac),
+            0 0 10px rgba(0, 212, 170, 0.25);
+        }
+        50% {
+          box-shadow:
+            0 0 8px var(--ac),
+            0 0 22px rgba(0, 212, 170, 0.5);
+        }
+      }
+      .logo-sub {
+        color: var(--mt);
+        font-size: 10px;
+      }
+
+      .nav-pill {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        color: rgba(255, 255, 255, 0.4);
+        padding: 7px 18px;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border: none;
+        background: none;
+        white-space: nowrap;
+      }
+      .nav-pill:hover {
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .nav-pill.active {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.18),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+          0 0 0 0.5px rgba(255, 255, 255, 0.1);
+      }
+      .nav-div {
+        width: 1px;
+        height: 18px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 0 3px;
+        flex-shrink: 0;
+      }
+      .nav-link {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.32);
+        padding: 7px 11px;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: color 0.2s;
+        text-decoration: none;
+        letter-spacing: 0.04em;
+        border: none;
+        background: none;
+      }
+      .nav-link:hover {
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      /* LAYOUT */
+      .main {
+        padding-bottom: clamp(80px, 12vh, 110px);
+      }
+      .page {
+        display: none;
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      .page.active {
+        display: block;
+        animation: page-enter 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 clamp(16px, 4vw, 40px);
+        position: relative;
+        z-index: 1;
+      }
+      .wrap-n {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 clamp(16px, 4vw, 40px);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* HOME HERO */
+      .hero {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(40px, 8vh, 80px) 0 clamp(32px, 6vh, 56px);
+      }
+      .page.active .hero > * {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .page.active .hero > *:nth-child(1) {
+        animation-delay: 0.04s;
+      }
+      .page.active .hero > *:nth-child(2) {
+        animation-delay: 0.12s;
+      }
+      .page.active .hero > *:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .page.active .hero > *:nth-child(4) {
+        animation-delay: 0.28s;
+      }
+      .page.active .hero > *:nth-child(5) {
+        animation-delay: 0.36s;
+      }
+      .hero-eyebrow {
+        font-family: var(--mono);
+        font-size: clamp(10px, 1.5vw, 12px);
+        color: var(--ac);
+        letter-spacing: 0.16em;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--ac);
+      }
+      .hero-name {
+        font-size: clamp(38px, 8vw, 88px);
+        font-weight: 300;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+      .hero-name em {
+        font-style: normal;
+        font-weight: 600;
+        background: linear-gradient(
+          135deg,
+          var(--ac) 0%,
+          var(--ac2) 55%,
+          var(--ac3) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-quote {
+        font-family: var(--mono);
+        font-size: clamp(11px, 1.5vw, 13px);
+        color: var(--mt);
+        margin-bottom: clamp(18px, 4vh, 30px);
+        letter-spacing: 0.04em;
+      }
+      .hero-quote span {
+        color: rgba(155, 123, 255, 0.6);
+      }
+      .hero-bio {
+        font-size: clamp(13px, 1.8vw, 16px);
+        color: rgba(180, 200, 220, 0.65);
+        line-height: 1.8;
+        max-width: 460px;
+        margin-bottom: clamp(26px, 5vh, 44px);
+      }
+      .hero-cta {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: clamp(10px, 1.4vw, 12px);
+        letter-spacing: 0.06em;
+        padding: clamp(8px, 1.5vh, 11px) clamp(14px, 2.5vw, 20px);
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.22s;
+        cursor: pointer;
+        border: none;
+      }
+      .btn-p {
+        background: var(--ac);
+        color: #060a12;
+        font-weight: 600;
+      }
+      .btn-p:hover {
+        filter: brightness(1.12);
+        transform: translateY(-1px);
+      }
+      .btn-g {
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .btn-g:hover {
+        background: rgba(255, 255, 255, 0.09);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+      }
+
+      /* SECTION HEADER */
+      .sh {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: clamp(48px, 8vh, 72px) 0 clamp(18px, 3vh, 26px);
+      }
+      .sh-tag {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--ac);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .sh-title {
+        font-size: clamp(14px, 2vw, 17px);
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.88);
+        flex-shrink: 0;
+      }
+      .sh-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+      }
+      .sh-link {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--mt);
+        text-decoration: none;
+        transition: color 0.2s;
+        flex-shrink: 0;
+      }
+      .sh-link:hover {
+        color: var(--ac);
+      }
+      .page.active .sh,
+      .page.active .bento,
+      .page.active .about-grid,
+      .page.active .contact-row,
+      .page.active footer,
+      .page.active .blog-hero,
+      .page.active .blog-note,
+      .page.active .blog-toolbar,
+      .page.active .pagination,
+      .page.active .art-wrap {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+      .page.active .sh {
+        animation-delay: 0.04s;
+      }
+      .page.active .bento {
+        animation-delay: 0.1s;
+      }
+      .page.active .about-grid {
+        animation-delay: 0.16s;
+      }
+      .page.active .contact-row {
+        animation-delay: 0.22s;
+      }
+      .page.active footer {
+        animation-delay: 0.28s;
+      }
+      .page.active .blog-hero {
+        animation-delay: 0.04s;
+      }
+      .page.active .blog-note {
+        animation-delay: 0.1s;
+      }
+      .page.active .blog-toolbar {
+        animation-delay: 0.16s;
+      }
+      .page.active .pagination {
+        animation-delay: 0.22s;
+      }
+      .page.active .art-wrap {
+        animation-delay: 0.06s;
+      }
+
+      /* BENTO */
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: clamp(8px, 1.2vw, 12px);
+        margin-bottom: clamp(40px, 7vh, 64px);
+      }
+      .cell {
+        background: var(--s1);
+        border: 1px solid var(--br);
+        border-radius: 14px;
+        padding: clamp(14px, 2.5vw, 22px);
+        position: relative;
+        transition:
+          border-color 0.22s,
+          background 0.22s;
+        overflow: hidden;
+      }
+      .cell::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.025) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .cell:hover {
+        border-color: rgba(255, 255, 255, 0.13);
+        background: var(--s2);
+      }
+      .c3 {
+        grid-column: span 3;
+      }
+      .c4 {
+        grid-column: span 4;
+      }
+      .c6 {
+        grid-column: span 6;
+      }
+      .c8 {
+        grid-column: span 8;
+      }
+      .c9 {
+        grid-column: span 9;
+      }
+      .c12 {
+        grid-column: span 12;
+      }
+      .cell-lbl {
+        font-family: var(--mono);
+        font-size: 9px;
+        color: var(--mt);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .cell-name {
+        font-size: clamp(13px, 1.8vw, 15px);
+        font-weight: 500;
+        color: #fff;
+        margin-bottom: 4px;
+      }
+      .cell-desc {
+        font-size: clamp(11px, 1.4vw, 13px);
+        color: var(--mt);
+        line-height: 1.6;
+      }
+      .cell-tag {
+        display: inline-block;
+        margin-top: 10px;
+        font-family: var(--mono);
+        font-size: 9px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: rgba(0, 212, 170, 0.07);
+        color: var(--ac);
+        border: 1px solid var(--brac);
+      }
+      .cell-ph {
+        border: 1.5px dashed rgba(255, 255, 255, 0.07);
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: clamp(100px, 16vw, 140px);
+      }
+      .cell-ph::before {
+        display: none;
+      }
+      .ph-ring {
+        width: clamp(32px, 4vw, 44px);
+        height: clamp(32px, 4vw, 44px);
+        border-radius: 50%;
+        border: 1.5px dashed rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(14px, 2vw, 18px);
+        margin-bottom: 10px;
+        color: rgba(255, 255, 255, 0.15);
+      }
+      .ph-txt {
+        font-family: var(--mono);
+        font-size: clamp(9px, 1.2vw, 10px);
+        color: rgba(255, 255, 255, 0.18);
+        letter-spacing: 0.08em;
+      }
+
+      /* ABOUT & CONTACT */
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: clamp(8px, 1.2vw, 10px);
+        margin-bottom: clamp(36px, 6vh, 52px);
+      }
+      .ac-cell {
+        background: var(--s1);
+        border: 1px solid var(--br);
+        border-radius: 10px;
+        padding: clamp(12px, 2vw, 16px) clamp(14px, 2.5vw, 18px);
+      }
+      .ac-k {
+        font-family: var(--mono);
+        font-size: 9px;
+        color: var(--mt);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .ac-v {
+        font-size: clamp(12px, 1.8vw, 14px);
+        color: var(--tx);
+      }
+      .contact-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: clamp(36px, 7vh, 60px);
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: clamp(10px, 1.4vw, 11px);
+        color: rgba(255, 255, 255, 0.45);
+        background: var(--s1);
+        border: 1px solid var(--br);
+        border-radius: 100px;
+        padding: clamp(6px, 1vh, 8px) clamp(12px, 2vw, 16px);
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .chip:hover {
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .cdot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      footer {
+        border-top: 1px solid var(--br);
+        padding: clamp(16px, 3vh, 22px) 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .ft {
+        font-family: var(--mono);
+        font-size: clamp(9px, 1.2vw, 10px);
+        color: var(--mt);
+        letter-spacing: 0.06em;
+      }
+
+      /* BLOG */
+      .blog-hero {
+        padding: clamp(40px, 7vh, 64px) 0 clamp(24px, 4vh, 36px);
+      }
+      .blog-hero h2 {
+        font-size: clamp(22px, 4vw, 34px);
+        font-weight: 300;
+        color: #fff;
+        margin-bottom: 6px;
+        letter-spacing: -0.02em;
+      }
+      .blog-hero p {
+        font-family: var(--mono);
+        font-size: clamp(10px, 1.4vw, 12px);
+        color: var(--mt);
+      }
+      .blog-note {
+        background: rgba(0, 212, 170, 0.04);
+        border: 1px solid rgba(0, 212, 170, 0.12);
+        border-radius: 10px;
+        padding: clamp(12px, 2vh, 16px) clamp(14px, 2.5vw, 20px);
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: clamp(14px, 2.5vh, 22px);
+        font-size: clamp(11px, 1.5vw, 13px);
+        color: var(--mt);
+        line-height: 1.65;
+      }
+      .blog-note code {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--ac);
+        background: rgba(0, 212, 170, 0.08);
+        padding: 1px 5px;
+        border-radius: 3px;
+      }
+      .blog-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: clamp(14px, 2.5vh, 22px);
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .filters {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .fp {
+        font-family: var(--mono);
+        font-size: clamp(9px, 1.2vw, 11px);
+        color: var(--mt);
+        padding: 5px clamp(10px, 1.8vw, 14px);
+        border-radius: 100px;
+        border: 1px solid var(--br);
+        background: none;
+        cursor: pointer;
+        transition: all 0.18s;
+        letter-spacing: 0.05em;
+      }
+      .fp:hover {
+        color: var(--tx);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .fp.active {
+        color: var(--ac);
+        border-color: var(--brac);
+        background: rgba(0, 212, 170, 0.06);
+      }
+      .post-list {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(6px, 1vh, 9px);
+        margin-bottom: clamp(18px, 3.5vh, 28px);
+        min-height: 160px;
+      }
+      .post-card {
+        background: var(--s1);
+        border: 1px solid var(--br);
+        border-radius: 10px;
+        padding: clamp(13px, 2.5vw, 18px) clamp(15px, 3vw, 22px);
+        cursor: pointer;
+        transition: all 0.18s;
+        display: flex;
+        gap: clamp(10px, 2vw, 18px);
+        align-items: flex-start;
+        opacity: 0;
+        transform: translateY(12px);
+        animation: rise-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        animation-delay: var(--delay, 0ms);
+      }
+      .post-card:hover {
+        border-color: rgba(255, 255, 255, 0.13);
+        background: var(--s2);
+        transform: translateX(3px);
+      }
+      .post-idx {
+        font-family: var(--mono);
+        font-size: clamp(10px, 1.4vw, 12px);
+        color: rgba(255, 255, 255, 0.1);
+        flex-shrink: 0;
+        padding-top: 2px;
+        min-width: 24px;
+      }
+      .post-main {
+        flex: 1;
+        min-width: 0;
+      }
+      .post-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 5px;
+      }
+      .post-title {
+        font-size: clamp(13px, 1.8vw, 15px);
+        font-weight: 500;
+        color: #fff;
+        line-height: 1.4;
+      }
+      .post-date {
+        font-family: var(--mono);
+        font-size: clamp(9px, 1.2vw, 10px);
+        color: var(--mt);
+        flex-shrink: 0;
+        padding-top: 2px;
+      }
+      .post-snip {
+        font-size: clamp(11px, 1.5vw, 12px);
+        color: var(--mt);
+        line-height: 1.6;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .post-tags {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .ptag {
+        font-family: var(--mono);
+        font-size: 9px;
+        padding: 2px 7px;
+        border-radius: 4px;
+      }
+      .ptag.hw {
+        background: rgba(0, 212, 170, 0.07);
+        color: var(--ac);
+        border: 1px solid rgba(0, 212, 170, 0.18);
+      }
+      .ptag.sw {
+        background: rgba(59, 158, 255, 0.07);
+        color: var(--ac2);
+        border: 1px solid rgba(59, 158, 255, 0.18);
+      }
+      .ptag.lf {
+        background: rgba(251, 191, 36, 0.07);
+        color: #fbbf24;
+        border: 1px solid rgba(251, 191, 36, 0.18);
+      }
+      .ptag.df {
+        background: rgba(155, 123, 255, 0.07);
+        color: var(--ac3);
+        border: 1px solid rgba(155, 123, 255, 0.18);
+      }
+      .pagination {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        padding-bottom: clamp(24px, 5vh, 48px);
+      }
+      .pg {
+        font-family: var(--mono);
+        font-size: 11px;
+        padding: 6px 13px;
+        border-radius: 6px;
+        border: 1px solid var(--br);
+        background: transparent;
+        color: var(--mt);
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .pg:hover:not(:disabled) {
+        border-color: rgba(255, 255, 255, 0.2);
+        color: var(--tx);
+      }
+      .pg.cur {
+        border-color: var(--brac);
+        color: var(--ac);
+        background: rgba(0, 212, 170, 0.07);
+      }
+      .pg:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+      }
+      .ld-box {
+        text-align: center;
+        padding: clamp(40px, 8vh, 64px) 0;
+      }
+      .ld {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ac);
+        margin: 0 3px;
+        animation: bd 1.2s infinite;
+      }
+      .ld:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .ld:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      @keyframes bd {
+        0%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes page-enter {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+          filter: blur(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+          filter: blur(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+      .ld-txt {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--mt);
+        margin-top: 12px;
+      }
+      .msg-box {
+        text-align: center;
+        padding: clamp(40px, 8vh, 64px) 0;
+        font-size: 13px;
+        color: var(--mt);
+        line-height: 1.8;
+      }
+
+      /* ARTICLE */
+      .art-wrap {
+        padding: clamp(28px, 5vh, 48px) 0 clamp(48px, 10vh, 80px);
+      }
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--mt);
+        cursor: pointer;
+        margin-bottom: clamp(20px, 4vh, 32px);
+        transition: color 0.2s;
+        border: none;
+        background: none;
+        padding: 0;
+        letter-spacing: 0.04em;
+      }
+      .back-btn:hover {
+        color: var(--ac);
+      }
+      .art-meta {
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--br);
+        margin-bottom: 22px;
+      }
+      .art-title {
+        font-size: clamp(19px, 3.5vw, 26px);
+        font-weight: 400;
+        color: #fff;
+        line-height: 1.3;
+        margin-bottom: 12px;
+      }
+      .art-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .art-date {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--mt);
+      }
+      .gh-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--mt);
+        border: 1px solid var(--br);
+        border-radius: 6px;
+        padding: 7px 13px;
+        text-decoration: none;
+        transition: all 0.2s;
+        margin-bottom: 24px;
+      }
+      .gh-link:hover {
+        color: var(--ac);
+        border-color: var(--brac);
+      }
+      .art-body {
+        font-size: clamp(14px, 2vw, 16px);
+        line-height: 1.85;
+        color: rgba(180, 200, 220, 0.82);
+      }
+      .art-body h1,
+      .art-body h2,
+      .art-body h3 {
+        color: #fff;
+        font-weight: 500;
+        margin: 2em 0 0.7em;
+      }
+      .art-body h1 {
+        font-size: clamp(18px, 2.5vw, 22px);
+      }
+      .art-body h2 {
+        font-size: clamp(16px, 2.2vw, 19px);
+      }
+      .art-body h3 {
+        font-size: clamp(14px, 2vw, 16px);
+      }
+      .art-body p {
+        margin-bottom: 1em;
+      }
+      .art-body code {
+        font-family: var(--mono);
+        font-size: 0.85em;
+        background: rgba(0, 212, 170, 0.07);
+        color: var(--ac);
+        padding: 2px 6px;
+        border-radius: 4px;
+        border: 1px solid rgba(0, 212, 170, 0.12);
+      }
+      .art-body pre {
+        background: var(--s1);
+        border: 1px solid var(--br);
+        border-radius: 10px;
+        padding: 16px 20px;
+        overflow-x: auto;
+        margin: 1.5em 0;
+      }
+      .art-body pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        color: var(--tx);
+      }
+      .art-body blockquote {
+        border-left: 2px solid var(--ac);
+        padding-left: 16px;
+        margin: 1.5em 0;
+        color: var(--mt);
+        font-style: italic;
+      }
+      .art-body ul,
+      .art-body ol {
+        padding-left: 1.5em;
+        margin-bottom: 1em;
+      }
+      .art-body li {
+        margin-bottom: 4px;
+      }
+      .art-body a {
+        color: var(--ac);
+        text-decoration: none;
+      }
+      .art-body a:hover {
+        text-decoration: underline;
+      }
+      .art-body img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin: 1em 0;
+        border: 1px solid var(--br);
+      }
+      .art-body hr {
+        border: none;
+        border-top: 1px solid var(--br);
+        margin: 2em 0;
+      }
+      .art-body table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5em 0;
+        font-size: 0.9em;
+      }
+      .art-body th {
+        background: var(--s1);
+        color: var(--ac);
+        padding: 9px 13px;
+        border: 1px solid var(--br);
+        font-family: var(--mono);
+        font-size: 0.85em;
+        text-align: left;
+      }
+      .art-body td {
+        padding: 9px 13px;
+        border: 1px solid var(--br);
+        color: var(--mt);
+      }
+      .art-foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid var(--br);
+        padding-top: 22px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .page,
+        .page.active,
+        .page.active .hero > *,
+        .page.active .sh,
+        .page.active .bento,
+        .page.active .about-grid,
+        .page.active .contact-row,
+        .page.active footer,
+        .page.active .blog-hero,
+        .page.active .blog-note,
+        .page.active .blog-toolbar,
+        .page.active .pagination,
+        .page.active .art-wrap,
+        .post-card {
+          opacity: 1;
+          transform: none;
+          filter: none;
+          animation: none !important;
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 640px) {
+        .bento {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .c3,
+        .c4,
+        .c6,
+        .c8,
+        .c9,
+        .c12 {
+          grid-column: span 2;
+        }
+        .hero-bio {
+          max-width: 100%;
+        }
+        .post-card {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .post-idx {
+          display: none;
+        }
+        .post-row {
+          flex-direction: column;
+          gap: 3px;
+        }
+        .logo-sub {
+          display: none;
+        }
+        .nav-link,
+        .nav-div {
+          display: none;
+        }
+      }
+      @media (max-width: 400px) {
+        .bento {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .c3,
+        .c4,
+        .c6,
+        .c8,
+        .c9,
+        .c12 {
+          grid-column: span 1;
+        }
+        .nav-shell {
+          width: calc(100% - 24px);
+          justify-content: center;
+        }
+        .nav-pill {
+          padding: 7px 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-shell" id="nav">
+      <div class="nav-logo" onclick="go('home')">
+        <span class="logo-dot"></span>
+        <span style="color: #fff; font-weight: 500">CyberWei</span>
+        <span class="logo-sub">/ EE</span>
+      </div>
+      <button class="nav-pill active" id="tab-home" onclick="go('home')">
+        主页
+      </button>
+      <button class="nav-pill" id="tab-blog" onclick="go('blog')">博客</button>
+      <div class="nav-div"></div>
+      <a class="nav-link" href="https://github.com/CyberWei922" target="_blank"
+        >GitHub</a
+      >
+      <a class="nav-link" href="https://b23.tv/1czpDiD" target="_blank">Bili</a>
+    </div>
+
+    <div class="main">
+      <!-- HOME -->
+      <div id="page-home" class="page active">
+        <div class="wrap">
+          <section class="hero">
+            <div class="hero-eyebrow">微电子科学与工程 · 2024级本科生</div>
+            <h1 class="hero-name">你好，<br />我是 <em>CyberWei</em></h1>
+            <p class="hero-quote">
+              <span>"</span> 斯人已逝，信仰长存 <span>"</span>
+            </p>
+            <p class="hero-bio">
+              芜湖人，热爱微电子、嵌入式系统与开源文化。<br />在电路与代码之间寻找属于自己的答案。
+            </p>
+            <div class="hero-cta">
+              <a
+                class="btn btn-p"
+                href="https://github.com/CyberWei922"
+                target="_blank"
+                >GitHub →</a
+              >
+              <button class="btn btn-g" onclick="go('blog')">读我的博客</button>
+            </div>
+          </section>
+
+          <div class="sh">
+            <span class="sh-tag">Projects</span>
+            <span class="sh-title">项目</span>
+            <div class="sh-line"></div>
+            <a
+              class="sh-link"
+              href="https://github.com/CyberWei922"
+              target="_blank"
+              >全部 →</a
+            >
+          </div>
+
+          <!--
+    ===== 如何填写 Bento 格子 =====
+    把 cell-ph 改成 cell，删掉 ph-ring 和 ph-txt，换成下面结构：
+
+    <div class="cell c4">
+      <div class="cell-lbl">项目 / 2024</div>
+      <div class="cell-name">项目名称</div>
+      <div class="cell-desc">一两句话描述这个项目做了什么</div>
+      <span class="cell-tag">标签</span>
+    </div>
+
+    格子宽度：c3=25% c4=33% c6=50% c8=66% c12=100%
+    建议搭配：一个 c8 主项目 + 两个 c4，或者四个 c3
+  -->
+          <div class="bento">
+            <div class="cell c8 cell-ph">
+              <div class="ph-ring">⬡</div>
+              <div class="ph-txt">主力项目 · 填写后删除 cell-ph</div>
+            </div>
+            <div class="cell c4 cell-ph">
+              <div class="ph-ring">◈</div>
+              <div class="ph-txt">项目 / 工具</div>
+            </div>
+            <div class="cell c4 cell-ph">
+              <div class="ph-ring">▦</div>
+              <div class="ph-txt">技能 / 工具栈</div>
+            </div>
+            <div class="cell c4 cell-ph">
+              <div class="ph-ring">◎</div>
+              <div class="ph-txt">实验 / Demo</div>
+            </div>
+            <div class="cell c4 cell-ph">
+              <div class="ph-ring">✦</div>
+              <div class="ph-txt">其他 / 链接</div>
+            </div>
+          </div>
+
+          <div class="sh">
+            <span class="sh-tag">About</span>
+            <span class="sh-title">关于</span>
+            <div class="sh-line"></div>
+          </div>
+          <div class="about-grid">
+            <div class="ac-cell">
+              <div class="ac-k">专业</div>
+              <div class="ac-v">微电子科学与工程</div>
+            </div>
+            <div class="ac-cell">
+              <div class="ac-k">状态</div>
+              <div class="ac-v">本科在读</div>
+            </div>
+            <div class="ac-cell">
+              <div class="ac-k">城市</div>
+              <div class="ac-v">安徽 · 芜湖</div>
+            </div>
+            <div class="ac-cell">
+              <div class="ac-k">方向</div>
+              <div class="ac-v">嵌入式 / VLSI</div>
+            </div>
+          </div>
+
+          <div class="sh">
+            <span class="sh-tag">Contact</span>
+            <span class="sh-title">联系</span>
+            <div class="sh-line"></div>
+          </div>
+          <div class="contact-row">
+            <a
+              class="chip"
+              href="https://qm.qq.com/cgi-bin/qm/qr?k=XRnKf-4KxWCWo-Q-dww75YHuh4SccctN"
+              target="_blank"
+              ><span class="cdot" style="background: #12b7f5"></span>QQ</a
+            >
+            <a class="chip" href="mailto:2206064568@qq.com"
+              ><span class="cdot" style="background: #00d4aa"></span>Email</a
+            >
+            <a class="chip" href="https://b23.tv/1czpDiD" target="_blank"
+              ><span class="cdot" style="background: #fb7299"></span>Bilibili</a
+            >
+            <a
+              class="chip"
+              href="https://github.com/CyberWei922"
+              target="_blank"
+              ><span class="cdot" style="background: #8b96a8"></span>GitHub</a
+            >
+          </div>
+
+          <footer>
+            <span class="ft">© 2024 CyberWei</span>
+            <span class="ft">Built with ♥ in Wuhu</span>
+          </footer>
+        </div>
+      </div>
+
+      <!-- BLOG -->
+      <div id="page-blog" class="page">
+        <div class="wrap-n">
+          <div class="blog-hero">
+            <h2>折腾记录</h2>
+            <p>电路、代码、还有那些没睡觉的夜晚</p>
+          </div>
+
+          <div class="blog-note">
+            <span style="color: var(--ac); flex-shrink: 0">ℹ</span>
+            <span>
+              文章可以放在独立的 GitHub 仓库里，每个
+              <code>.md</code> 文件就是一篇文章。 顶部写 frontmatter
+              设置标题和标签，推送到 GitHub 即自动发布。
+            </span>
+          </div>
+
+          <div class="blog-toolbar">
+            <div class="filters">
+              <button class="fp active" onclick="filt('all', this)">
+                全部
+              </button>
+              <button class="fp" onclick="filt('hardware', this)">硬件</button>
+              <button class="fp" onclick="filt('software', this)">软件</button>
+              <button class="fp" onclick="filt('life', this)">生活</button>
+            </div>
+            <button class="fp" onclick="setSourceFromPrompt()">
+              配置数据源
+            </button>
+          </div>
+
+          <div class="blog-note" id="source-note" style="margin-top: -2px">
+            <span style="color: var(--ac); flex-shrink: 0">◎</span>
+            <span id="source-text">当前数据源将从 GitHub 仓库加载。</span>
+          </div>
+
+          <div class="post-list" id="post-list">
+            <div class="ld-box">
+              <div>
+                <span class="ld"></span><span class="ld"></span
+                ><span class="ld"></span>
+              </div>
+              <div class="ld-txt">加载文章...</div>
+            </div>
+          </div>
+          <div class="pagination" id="pg-box"></div>
+        </div>
+      </div>
+
+      <!-- ARTICLE -->
+      <div id="page-article" class="page">
+        <div class="wrap-n">
+          <div class="art-wrap">
+            <button class="back-btn" onclick="go('blog')">← 返回博客</button>
+            <div class="art-meta">
+              <div class="art-title" id="art-title"></div>
+              <div class="art-info">
+                <span class="art-date" id="art-date"></span>
+                <div
+                  id="art-tags"
+                  style="display: flex; gap: 5px; flex-wrap: wrap"
+                ></div>
+              </div>
+            </div>
+            <a id="art-gh" class="gh-link" target="_blank"
+              >↗ 在 GitHub 查看源文件</a
+            >
+            <div class="art-body" id="art-body"></div>
+            <div class="art-foot">
+              <button class="back-btn" onclick="go('blog')" style="margin: 0">
+                ← 返回列表
+              </button>
+              <span class="ft">© 2024 CyberWei</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* ── 配置区 ── 只需修改这里 */
+      const DEFAULT_SOURCE = {
+        owner: "CyberWei922",
+        repo: "CyberWei922.github.io",
+        branch: "main",
+        dir: "posts",
+      };
+      const PER = 8; /* 每页文章数 */
+
+      function getSource() {
+        try {
+          const saved = JSON.parse(
+            localStorage.getItem("blogSource") || "null",
+          );
+          return Object.assign({}, DEFAULT_SOURCE, saved || {});
+        } catch {
+          return { ...DEFAULT_SOURCE };
+        }
+      }
+
+      function saveSource(source) {
+        localStorage.setItem("blogSource", JSON.stringify(source));
+        updateSourceText();
+      }
+
+      function updateSourceText() {
+        const source = getSource();
+        const el = document.getElementById("source-text");
+        if (!el) return;
+        el.innerHTML = `当前数据源：<code>${source.owner}/${source.repo}</code> · 分支 <code>${source.branch}</code> · 目录 <code>${source.dir}</code>`;
+      }
+
+      function setSourceFromPrompt() {
+        const current = getSource();
+        const owner = prompt("请输入文章仓库 owner", current.owner);
+        if (owner === null) return;
+        const repo = prompt("请输入文章仓库名称", current.repo);
+        if (repo === null) return;
+        const branch = prompt("请输入分支名称", current.branch);
+        if (branch === null) return;
+        const dir = prompt("请输入 Markdown 目录", current.dir);
+        if (dir === null) return;
+        saveSource({
+          owner: owner.trim() || current.owner,
+          repo: repo.trim() || current.repo,
+          branch: branch.trim() || current.branch,
+          dir: dir.trim() || current.dir,
+        });
+        fetched = false;
+        all = [];
+        fld = [];
+        pg = 1;
+        if (document.getElementById("page-blog").classList.contains("active"))
+          loadPosts();
+      }
+
+      /* ── 运行时状态 ── */
+      let all = [],
+        fld = [],
+        pg = 1,
+        cf = "all",
+        fetched = false;
+
+      /* ── 导航 ── */
+      function go(name) {
+        document
+          .querySelectorAll(".page")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".nav-pill")
+          .forEach((t) => t.classList.remove("active"));
+        document.getElementById("page-" + name).classList.add("active");
+        const t = document.getElementById(
+          "tab-" + (name === "article" ? "blog" : name),
+        );
+        if (t) t.classList.add("active");
+        window.scrollTo(0, 0);
+        if (!fetched && (name === "blog" || name === "home")) loadPosts();
+      }
+
+      /* ── 日期格式化 ── */
+      function fmt(s) {
+        if (!s) return "";
+        const d = new Date(s);
+        return (
+          d.getFullYear() +
+          "." +
+          String(d.getMonth() + 1).padStart(2, "0") +
+          "." +
+          String(d.getDate()).padStart(2, "0")
+        );
+      }
+
+      /* ── 解析 frontmatter ──
+   支持格式：
+   ---
+   title: 文章标题
+   date: 2024-06-01
+   tags: [硬件, ESP32]
+   desc: 可选摘要
+   ---
+*/
+      function parseFront(raw) {
+        const meta = { title: "无标题", date: "", tags: [], desc: "" };
+        const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        if (!m) return { meta, body: raw };
+        const fm = m[1],
+          body = raw.slice(m[0].length).trim();
+        const getVal = (key) => {
+          const r = fm.match(
+            new RegExp("^" + key + ":\\s*[\"']?(.+?)[\"']?\\s*$", "m"),
+          );
+          return r ? r[1].trim() : "";
+        };
+        meta.title = getVal("title") || meta.title;
+        meta.date = getVal("date");
+        meta.desc = getVal("desc") || getVal("description");
+        const tagsLine = fm.match(/^tags:\s*\[([^\]]*)\]/m);
+        if (tagsLine)
+          meta.tags = tagsLine[1]
+            .split(",")
+            .map((t) => t.trim().replace(/["']/g, ""))
+            .filter(Boolean);
+        return { meta, body };
+      }
+
+      /* ── 标签颜色 ── */
+      const HW = [
+        "硬件",
+        "hardware",
+        "EE",
+        "电路",
+        "嵌入式",
+        "fpga",
+        "mcu",
+        "arduino",
+        "stm32",
+      ];
+      const SW = [
+        "软件",
+        "software",
+        "代码",
+        "前端",
+        "web",
+        "python",
+        "js",
+        "linux",
+        "rust",
+      ];
+      const LF = ["生活", "life", "随笔", "杂谈", "日记"];
+      function tc(t) {
+        const l = t.toLowerCase();
+        if (HW.some((k) => l.includes(k.toLowerCase()))) return "hw";
+        if (SW.some((k) => l.includes(k.toLowerCase()))) return "sw";
+        if (LF.some((k) => l.includes(k.toLowerCase()))) return "lf";
+        return "df";
+      }
+      const MAP = {
+        hardware: HW,
+        software: SW,
+        life: LF,
+      };
+
+      /* ── 加载文章列表 ── */
+      async function loadPosts() {
+        fetched = true;
+        const el = document.getElementById("post-list");
+        const source = getSource();
+        try {
+          const r = await fetch(
+            `https://api.github.com/repos/${source.owner}/${source.repo}/contents/${source.dir}?ref=${source.branch}`,
+            { headers: { Accept: "application/vnd.github.v3+json" } },
+          );
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          const files = await r.json();
+          const mds = files.filter((f) => f.name.endsWith(".md"));
+          if (!mds.length) {
+            el.innerHTML = `<div class="msg-box">
+        posts/ 目录下还没有文章<br>
+        <span style="font-size:11px;font-family:var(--mono);margin-top:8px;display:block">
+            在仓库里新建 <span style="color:var(--ac)">${source.dir}/hello-world.md</span> 即可发布第一篇
+        </span>
+      </div>`;
+            return;
+          }
+          /* 并行拉取文件内容 */
+          const posts = await Promise.all(
+            mds.map(async (f) => {
+              const cr = await fetch(f.download_url);
+              const raw = await cr.text();
+              const { meta, body } = parseFront(raw);
+              return {
+                slug: f.name.replace(/\.md$/, ""),
+                body,
+                meta,
+                url: f.html_url,
+              };
+            }),
+          );
+          /* 按 date 降序排列，没有 date 的放最后 */
+          all = posts.sort((a, b) => {
+            if (a.meta.date && b.meta.date)
+              return new Date(b.meta.date) - new Date(a.meta.date);
+            if (a.meta.date) return -1;
+            if (b.meta.date) return 1;
+            return 0;
+          });
+          filt("all");
+        } catch (e) {
+          el.innerHTML = `<div class="msg-box">
+      ⚠ 无法加载文章<br>
+      <span style="font-size:11px;font-family:var(--mono);margin-top:8px;display:block">
+        请确认 <span style="color:var(--ac)">${source.owner}/${source.repo}/${source.dir}/</span> 目录存在，且仓库为公开状态
+      </span>
+    </div>`;
+        }
+      }
+
+      /* ── 筛选 ── */
+      function filt(f, btn) {
+        cf = f;
+        pg = 1;
+        document
+          .querySelectorAll(".fp")
+          .forEach((b) => b.classList.remove("active"));
+        if (btn) btn.classList.add("active");
+        fld =
+          f === "all"
+            ? all
+            : all.filter((p) =>
+                p.meta.tags.some((t) =>
+                  MAP[f]?.some((k) =>
+                    t.toLowerCase().includes(k.toLowerCase()),
+                  ),
+                ),
+              );
+        render();
+      }
+
+      /* ── 渲染列表 ── */
+      function render() {
+        const el = document.getElementById("post-list"),
+          pgEl = document.getElementById("pg-box");
+        if (!fld.length) {
+          el.innerHTML = `<div class="msg-box">这个分类暂无文章 ✦</div>`;
+          pgEl.innerHTML = "";
+          return;
+        }
+        const tot = Math.ceil(fld.length / PER),
+          sl = fld.slice((pg - 1) * PER, pg * PER);
+        el.innerHTML = sl
+          .map((p, i) => {
+            const idx = (pg - 1) * PER + i + 1;
+            const snip =
+              p.meta.desc ||
+              p.body
+                .replace(/#{1,6}\s[^\n]*/g, "")
+                .replace(/[*`\[\]!]/g, "")
+                .replace(/\n+/g, " ")
+                .trim()
+                .slice(0, 100) + "...";
+            return `<div class="post-card" style="--delay:${i * 60}ms" onclick="openPost('${p.slug}')">
+      <div class="post-idx">${String(idx).padStart(2, "0")}</div>
+      <div class="post-main">
+        <div class="post-row">
+          <div class="post-title">${p.meta.title}</div>
+          <div class="post-date">${fmt(p.meta.date)}</div>
+        </div>
+        <div class="post-snip">${snip}</div>
+        <div class="post-tags">${p.meta.tags.map((t) => `<span class="ptag ${tc(t)}">${t}</span>`).join("")}</div>
+      </div>
+    </div>`;
+          })
+          .join("");
+        if (tot <= 1) {
+          pgEl.innerHTML = "";
+          return;
+        }
+        let h = `<button class="pg" onclick="gp(${pg - 1})" ${pg === 1 ? "disabled" : ""}>←</button>`;
+        for (let i = 1; i <= tot; i++)
+          h += `<button class="pg ${i === pg ? "cur" : ""}" onclick="gp(${i})">${i}</button>`;
+        h += `<button class="pg" onclick="gp(${pg + 1})" ${pg === tot ? "disabled" : ""}>→</button>`;
+        pgEl.innerHTML = h;
+      }
+
+      function gp(n) {
+        const t = Math.ceil(fld.length / PER);
+        if (n < 1 || n > t) return;
+        pg = n;
+        render();
+        window.scrollTo(0, 0);
+      }
+
+      /* ── 打开文章 ── */
+      function openPost(slug) {
+        const post = all.find((p) => p.slug === slug);
+        if (!post) return;
+        go("article");
+        document.getElementById("art-title").textContent = post.meta.title;
+        document.getElementById("art-date").textContent = fmt(post.meta.date);
+        document.getElementById("art-tags").innerHTML = post.meta.tags
+          .map((t) => `<span class="ptag ${tc(t)}">${t}</span>`)
+          .join("");
+        document.getElementById("art-gh").href = post.url;
+        document.getElementById("art-body").innerHTML = marked.parse(post.body);
+      }
+
+      /* 初始化 */
+      updateSourceText();
+      loadPosts();
+    </script>
+  </body>
+</html>
