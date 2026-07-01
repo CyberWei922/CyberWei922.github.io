@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CyberWei</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<title>CyberWei — 微电子 · 折腾 · 骑行</title>
+<meta name="description" content="安徽大学微电子专业学生，热衷于 Linux 系统、网络架构与 Android 底层，也骑公路车。这里是我的折腾记录。">
+<meta property="og:title" content="CyberWei">
+<meta property="og:description" content="微电子专业学生，热衷于 Linux 系统、网络架构与 Android 底层，也骑公路车。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberwei922.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CyberWei">
+<meta name="twitter:description" content="微电子专业学生，热衷于 Linux 系统、网络架构与 Android 底层，也骑公路车。">
+<link rel="canonical" href="https://cyberwei922.github.io/">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-7OPGA/pLAD3KM4IQON/JLQ2OkMHCjAGVaFJ0r04sFuaGMFkDU4GWiHOPMkpZqpD8bJJcmKR0O4VfCVHIVVLw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -16,13 +25,21 @@
   --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);min-height:100vh;overflow-x:hidden;position:relative;opacity:0;transition:opacity .45s ease}
+body.is-ready{opacity:1}
 body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:radial-gradient(ellipse 70% 50% at 10% 60%,rgba(0,212,170,0.05) 0%,transparent 70%),
     radial-gradient(ellipse 60% 40% at 90% 20%,rgba(59,158,255,0.04) 0%,transparent 70%),
     linear-gradient(rgba(255,255,255,0.011) 1px,transparent 1px),
     linear-gradient(90deg,rgba(255,255,255,0.011) 1px,transparent 1px);
   background-size:100% 100%,100% 100%,36px 36px,36px 36px}
+
+/* PAGE REVEAL */
+.page{display:none;opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
+.page.active{display:block;opacity:1;transform:none}
+.hero,.skill-card,.proj-card,.gear-card,.strava-stat,.act-card,.post-card,.ac-cell,.chip{animation:cardIn .65s cubic-bezier(.2,.8,.2,1) both;animation-fill-mode:both}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 
 /* NAV */
 .nav{position:fixed;bottom:clamp(14px,3vh,26px);left:50%;transform:translateX(-50%);z-index:200;
@@ -36,7 +53,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   max-width:calc(100vw - 24px)}
 .nav-logo{font-family:var(--mono);font-size:12px;color:#fff;padding:6px 14px 6px 10px;
   letter-spacing:0.06em;font-weight:500;display:flex;align-items:center;gap:7px;cursor:pointer;
-  border-right:1px solid rgba(255,255,255,0.08);margin-right:2px;flex-shrink:0}
+  border-right:1px solid rgba(255,255,255,0.08);margin-right:2px;flex-shrink:0;
+  background:none;border-top:none;border-bottom:none;border-left:none;outline:none}
+.nav-brand-name{color:#fff;font-weight:500}
 .logo-dot{width:6px;height:6px;border-radius:50%;background:var(--ac);flex-shrink:0;
   animation:glow 3s ease-in-out infinite}
 @keyframes glow{0%,100%{box-shadow:0 0 4px var(--ac),0 0 10px rgba(0,212,170,0.2)}
@@ -178,6 +197,9 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 /* ── STRAVA ── */
 .strava-wrap{margin-bottom:clamp(40px,6vh,60px)}
 .strava-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+.strava-title{display:flex;align-items:center;gap:8px}
+.strava-dot{font-size:18px}
+.strava-bike-model{font-size:13px;color:var(--tx);font-weight:500}
 .strava-updated{font-family:var(--mono);font-size:10px;color:var(--mt)}
 .strava-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:16px}
 .strava-stat{background:var(--s1);border:1px solid var(--br);border-radius:10px;padding:14px 16px}
@@ -242,7 +264,7 @@ footer{border-top:1px solid var(--br);padding:20px 0;display:flex;
 .post-title{font-size:clamp(13px,1.8vw,15px);font-weight:500;color:#fff;line-height:1.4}
 .post-date{font-family:var(--mono);font-size:10px;color:var(--mt);flex-shrink:0;padding-top:2px}
 .post-snip{font-size:clamp(11px,1.5vw,12px);color:var(--mt);line-height:1.6;margin-bottom:8px;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .post-tags{display:flex;gap:5px;flex-wrap:wrap}
 .blgtag{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:4px}
 .blgtag.hw{background:rgba(0,212,170,0.07);color:var(--ac);border:1px solid rgba(0,212,170,0.18)}
@@ -311,19 +333,19 @@ footer{border-top:1px solid var(--br);padding:20px 0;display:flex;
 <body>
 
 <!-- NAV -->
-<div class="nav" id="nav">
-  <div class="nav-logo" onclick="go('home')">
+<nav class="nav" id="nav" aria-label="主导航">
+  <button class="nav-logo" onclick="go('home')" aria-label="返回主页">
     <span class="logo-dot"></span>
-    <span style="color:#fff;font-weight:500">CyberWei</span>
+    <span class="nav-brand-name">CyberWei</span>
     <span class="logo-sub">/ EE</span>
-  </div>
-  <button class="nav-pill active" id="tab-home" onclick="go('home')">主页</button>
+  </button>
+  <button class="nav-pill active" id="tab-home" onclick="go('home')" aria-current="page">主页</button>
   <button class="nav-pill" id="tab-blog" onclick="go('blog')">博客</button>
-  <div class="nav-div"></div>
-  <a class="nav-link" href="https://github.com/CyberWei922" target="_blank">GitHub</a>
-  <a class="nav-link" href="https://www.strava.com/athletes/152238954" target="_blank">Strava</a>
-  <a class="nav-link" href="https://b23.tv/1czpDiD" target="_blank">Bili</a>
-</div>
+  <div class="nav-div" role="separator"></div>
+  <a class="nav-link" href="https://github.com/CyberWei922" target="_blank" rel="noopener noreferrer" aria-label="GitHub（新标签页打开）">GitHub</a>
+  <a class="nav-link" href="https://www.strava.com/athletes/152238954" target="_blank" rel="noopener noreferrer" aria-label="Strava（新标签页打开）">Strava</a>
+  <a class="nav-link" href="https://b23.tv/1czpDiD" target="_blank" rel="noopener noreferrer" aria-label="Bilibili（新标签页打开）">Bili</a>
+</nav>
 
 <div class="main">
 
@@ -397,7 +419,7 @@ footer{border-top:1px solid var(--br);padding:20px 0;display:flex;
   <div class="about-grid">
     <div class="ac-cell"><div class="ac-k">学校</div><div class="ac-v">安徽大学</div></div>
     <div class="ac-cell"><div class="ac-k">专业</div><div class="ac-v">微电子科学与工程</div></div>
-    <div class="ac-cell"><div class="ac-k">年级</div><div class="ac-v">2024级 大二</div></div>
+    <div class="ac-cell"><div class="ac-k">年级</div><div class="ac-v" id="grade-cell">2024级</div></div>
     <div class="ac-cell"><div class="ac-k">竞赛</div><div class="ac-v">电赛备赛中</div></div>
   </div>
 
@@ -416,7 +438,7 @@ footer{border-top:1px solid var(--br);padding:20px 0;display:flex;
   </div>
 
   <footer>
-    <span class="ft">© 2024 CyberWei</span>
+    <span class="ft" id="footer-copy"></span>
     <span class="ft">安徽大学 · 微电子</span>
   </footer>
 </div>
@@ -460,7 +482,7 @@ footer{border-top:1px solid var(--br);padding:20px 0;display:flex;
     <div class="art-body" id="art-body"></div>
     <div class="art-foot">
       <button class="back-btn" onclick="go('blog')" style="margin:0">← 返回列表</button>
-      <span class="ft">© 2024 CyberWei</span>
+      <span class="ft" id="art-footer-copy"></span>
     </div>
   </div>
 </div>
@@ -475,20 +497,14 @@ const OWNER='CyberWei922', REPO='CyberWei922.github.io', BRANCH='main', POSTS_DI
 /* ── NAV ── */
 function go(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-pill').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-pill').forEach(t=>{t.classList.remove('active');t.removeAttribute('aria-current');});
   document.getElementById('page-'+name).classList.add('active');
   const t=document.getElementById('tab-'+(name==='article'?'blog':name));
-  if(t)t.classList.add('active');
+  if(t){t.classList.add('active');t.setAttribute('aria-current','page');}
   window.scrollTo(0,0);
   if(name==='blog'&&!blogFetched) loadBlog();
 }
 
-/* ── FETCH helper ── */
-async function fetchJSON(url){
-  const r=await fetch(url);
-  if(!r.ok) throw new Error(r.status);
-  return r.json();
-}
 
 /* ══ SKILLS ══ */
 const COLOR_MAP={
@@ -566,9 +582,9 @@ async function loadStrava(){
     const acts=d.recent_activities||[];
     el.innerHTML=`
       <div class="strava-header">
-        <div style="display:flex;align-items:center;gap:8px">
-          <span class="strava-orange" style="font-size:18px">⬡</span>
-          <span style="font-size:13px;color:var(--tx);font-weight:500">美利达 瑞克多 Team &nbsp;·&nbsp; 佳明 Edge 540</span>
+        <div class="strava-title">
+          <span class="strava-orange strava-dot">⬡</span>
+          <span class="strava-bike-model">美利达 瑞克多 Team &nbsp;·&nbsp; 佳明 Edge 540</span>
         </div>
         <div class="strava-updated">更新于 ${updDate}</div>
       </div>
@@ -748,11 +764,41 @@ function openPost(slug){
   document.getElementById('art-body').innerHTML=marked.parse(post.body);
 }
 
+/* ── FETCH helper with sessionStorage cache ── */
+async function fetchJSON(url){
+  const cached=sessionStorage.getItem(url);
+  if(cached)return JSON.parse(cached);
+  const r=await fetch(url);
+  if(!r.ok) throw new Error(r.status);
+  const data=await r.json();
+  try{sessionStorage.setItem(url,JSON.stringify(data));}catch(_){}
+  return data;
+}
+
 /* ── INIT ── */
-loadSkills();
-loadProjects();
-loadStrava();
-loadGear();
+(function(){
+  const yr=new Date().getFullYear();
+  const copy=`© 2024${yr>2024?'–'+yr:''} CyberWei`;
+  const fc=document.getElementById('footer-copy');
+  const afc=document.getElementById('art-footer-copy');
+  if(fc)fc.textContent=copy;
+  if(afc)afc.textContent=copy;
+
+  // 动态年级：入学年 2024，每年 9 月升年级
+  const enrollYear=2024;
+  const now=new Date();
+  const academic=now.getMonth()>=8?now.getFullYear():now.getFullYear()-1;
+  const yearNum=Math.min(academic-enrollYear+1,4);
+  const yearMap=['大一','大二','大三','大四'];
+  const gc=document.getElementById('grade-cell');
+  if(gc)gc.textContent=`2024级 ${yearMap[yearNum-1]||''}`;
+})();
+
+requestAnimationFrame(() => {
+  document.body.classList.add('is-ready');
+});
+
+Promise.allSettled([loadSkills(), loadProjects(), loadStrava(), loadGear()]);
 </script>
 </body>
 </html>
