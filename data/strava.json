@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-02T07:29:34Z",
+  "updated_at": "2026-07-02T10:36:22Z",
   "all_time": {
     "distance_km": 7409.9,
     "moving_time_h": 289.4,
@@ -65,14 +65,6 @@
       "moving_time_h": 2.4,
       "elevation_m": 539,
       "avg_speed_kmh": 32.1
-    },
-    {
-      "name": "新车",
-      "date": "2026-06-12",
-      "distance_km": 60.4,
-      "moving_time_h": 2.1,
-      "elevation_m": 429,
-      "avg_speed_kmh": 28.3
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
