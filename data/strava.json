@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-03T12:09:12Z",
+  "updated_at": "2026-07-03T15:09:29Z",
   "all_time": {
     "distance_km": 7409.9,
     "moving_time_h": 289.4,
@@ -49,22 +49,6 @@
       "moving_time_h": 0.8,
       "elevation_m": 47,
       "avg_speed_kmh": 23.7
-    },
-    {
-      "name": "7.67kg",
-      "date": "2026-06-14",
-      "distance_km": 11.3,
-      "moving_time_h": 0.3,
-      "elevation_m": 13,
-      "avg_speed_kmh": 41.4
-    },
-    {
-      "name": "瑞克多车主团建",
-      "date": "2026-06-13",
-      "distance_km": 77.8,
-      "moving_time_h": 2.4,
-      "elevation_m": 539,
-      "avg_speed_kmh": 32.1
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
