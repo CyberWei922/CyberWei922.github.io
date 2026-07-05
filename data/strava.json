@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-05T10:10:37Z",
+  "updated_at": "2026-07-05T12:14:31Z",
   "all_time": {
     "distance_km": 7409.9,
     "moving_time_h": 289.4,
@@ -33,14 +33,6 @@
       "moving_time_h": 1.3,
       "elevation_m": 143,
       "avg_speed_kmh": 33.0
-    },
-    {
-      "name": "Evening Ride",
-      "date": "2026-06-16",
-      "distance_km": 44.1,
-      "moving_time_h": 1.4,
-      "elevation_m": 148,
-      "avg_speed_kmh": 32.0
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
