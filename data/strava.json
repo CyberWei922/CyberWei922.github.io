@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-07-08T12:19:41Z",
+  "updated_at": "2026-07-08T15:20:18Z",
   "all_time": {
-    "distance_km": 7409.9,
-    "moving_time_h": 289.4,
+    "distance_km": 7427.1,
+    "moving_time_h": 290.2,
     "elevation_m": 29368,
-    "count": 268
+    "count": 270
   },
   "ytd": {
-    "distance_km": 2044.8,
-    "moving_time_h": 75.9,
+    "distance_km": 2062.1,
+    "moving_time_h": 76.7,
     "elevation_m": 8853,
-    "count": 57
+    "count": 59
   },
   "recent_4w": {
     "distance_km": 321.5,
@@ -19,20 +19,20 @@
   "biggest_ride_km": 205.4,
   "recent_activities": [
     {
-      "name": "傍晚骑行",
-      "date": "2026-06-24",
-      "distance_km": 66.0,
-      "moving_time_h": 2.0,
-      "elevation_m": 227,
-      "avg_speed_kmh": 32.4
+      "name": "Evening Ride",
+      "date": "2026-07-08",
+      "distance_km": 8.3,
+      "moving_time_h": 0.4,
+      "elevation_m": 0,
+      "avg_speed_kmh": 22.0
     },
     {
-      "name": "傍晚骑行",
-      "date": "2026-06-17",
-      "distance_km": 42.7,
-      "moving_time_h": 1.3,
-      "elevation_m": 143,
-      "avg_speed_kmh": 33.0
+      "name": "Evening Ride",
+      "date": "2026-07-08",
+      "distance_km": 9.0,
+      "moving_time_h": 0.4,
+      "elevation_m": 0,
+      "avg_speed_kmh": 20.6
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
