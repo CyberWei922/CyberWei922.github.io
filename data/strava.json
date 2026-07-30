@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-29T23:04:30Z",
+  "updated_at": "2026-07-30T02:08:26Z",
   "all_time": {
     "distance_km": 7502.1,
     "moving_time_h": 293.6,
@@ -24,14 +24,6 @@
       "distance_km": 75.0,
       "moving_time_h": 3.4,
       "elevation_m": 353,
-      "avg_speed_kmh": 22.0
-    },
-    {
-      "name": "Evening Ride",
-      "date": "2026-07-08",
-      "distance_km": 8.3,
-      "moving_time_h": 0.4,
-      "elevation_m": 0,
       "avg_speed_kmh": 22.0
     }
   ],
