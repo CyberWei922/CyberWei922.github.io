@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-10T13:01:39Z",
+  "updated_at": "2026-08-10T14:55:34Z",
   "all_time": {
     "distance_km": 7630.3,
     "moving_time_h": 298.5,
@@ -33,14 +33,6 @@
       "moving_time_h": 2.2,
       "elevation_m": 75,
       "avg_speed_kmh": 23.6
-    },
-    {
-      "name": "紫蓬山神秘小圈",
-      "date": "2026-07-25",
-      "distance_km": 75.0,
-      "moving_time_h": 3.4,
-      "elevation_m": 353,
-      "avg_speed_kmh": 22.0
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
