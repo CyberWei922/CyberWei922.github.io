@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T12:40:29Z",
+  "updated_at": "2026-08-19T13:41:21Z",
   "all_time": {
     "distance_km": 7630.3,
     "moving_time_h": 298.5,
@@ -25,14 +25,6 @@
       "moving_time_h": 2.7,
       "elevation_m": 501,
       "avg_speed_kmh": 28.4
-    },
-    {
-      "name": "Afternoon Ride",
-      "date": "2026-08-06",
-      "distance_km": 51.4,
-      "moving_time_h": 2.2,
-      "elevation_m": 75,
-      "avg_speed_kmh": 23.6
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
