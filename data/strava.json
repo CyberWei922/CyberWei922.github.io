@@ -1,22 +1,31 @@
 {
-  "updated_at": "2026-09-01T01:37:46Z",
+  "updated_at": "2026-09-01T07:14:52Z",
   "all_time": {
-    "distance_km": 7630.3,
-    "moving_time_h": 298.5,
-    "elevation_m": 30297,
-    "count": 273
+    "distance_km": 7663.9,
+    "moving_time_h": 299.6,
+    "elevation_m": 30417,
+    "count": 274
   },
   "ytd": {
-    "distance_km": 2265.3,
-    "moving_time_h": 85.0,
-    "elevation_m": 9782,
-    "count": 62
+    "distance_km": 2298.8,
+    "moving_time_h": 86.1,
+    "elevation_m": 9902,
+    "count": 63
   },
   "recent_4w": {
     "distance_km": 128.2,
     "count": 2
   },
   "biggest_ride_km": 205.4,
-  "recent_activities": [],
+  "recent_activities": [
+    {
+      "name": "台风吗",
+      "date": "2026-09-01",
+      "distance_km": 33.5,
+      "moving_time_h": 1.1,
+      "elevation_m": 120,
+      "avg_speed_kmh": 30.1
+    }
+  ],
   "strava_url": "https://www.strava.com/athletes/152238954"
 }
