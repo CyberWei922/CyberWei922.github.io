@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-09-02T00:58:34Z",
+  "updated_at": "2026-09-02T05:37:09Z",
   "all_time": {
-    "distance_km": 7663.9,
-    "moving_time_h": 299.6,
-    "elevation_m": 30417,
-    "count": 274
+    "distance_km": 7697.2,
+    "moving_time_h": 300.9,
+    "elevation_m": 30539,
+    "count": 275
   },
   "ytd": {
-    "distance_km": 2298.8,
-    "moving_time_h": 86.1,
-    "elevation_m": 9902,
-    "count": 63
+    "distance_km": 2332.2,
+    "moving_time_h": 87.4,
+    "elevation_m": 10024,
+    "count": 64
   },
   "recent_4w": {
     "distance_km": 161.8,
@@ -18,6 +18,14 @@
   },
   "biggest_ride_km": 205.4,
   "recent_activities": [
+    {
+      "name": "晨间骑行",
+      "date": "2026-09-02",
+      "distance_km": 33.4,
+      "moving_time_h": 1.3,
+      "elevation_m": 122,
+      "avg_speed_kmh": 26.3
+    },
     {
       "name": "台风吗",
       "date": "2026-09-01",
