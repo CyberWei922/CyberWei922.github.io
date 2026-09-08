@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-08T09:21:29Z",
+  "updated_at": "2026-09-08T14:07:37Z",
   "all_time": {
     "distance_km": 7844.6,
     "moving_time_h": 305.4,
@@ -41,14 +41,6 @@
       "moving_time_h": 1.3,
       "elevation_m": 122,
       "avg_speed_kmh": 26.3
-    },
-    {
-      "name": "台风吗",
-      "date": "2026-09-01",
-      "distance_km": 33.5,
-      "moving_time_h": 1.1,
-      "elevation_m": 120,
-      "avg_speed_kmh": 30.1
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
