@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-09-07T23:58:50Z",
+  "updated_at": "2026-09-08T04:19:39Z",
   "all_time": {
-    "distance_km": 7804.4,
-    "moving_time_h": 304.2,
-    "elevation_m": 30843,
-    "count": 276
+    "distance_km": 7844.6,
+    "moving_time_h": 305.4,
+    "elevation_m": 30870,
+    "count": 277
   },
   "ytd": {
-    "distance_km": 2439.3,
-    "moving_time_h": 90.6,
-    "elevation_m": 10328,
-    "count": 65
+    "distance_km": 2479.5,
+    "moving_time_h": 91.8,
+    "elevation_m": 10355,
+    "count": 66
   },
   "recent_4w": {
     "distance_km": 174.1,
@@ -18,6 +18,14 @@
   },
   "biggest_ride_km": 205.4,
   "recent_activities": [
+    {
+      "name": "晨间骑行",
+      "date": "2026-09-08",
+      "distance_km": 40.1,
+      "moving_time_h": 1.2,
+      "elevation_m": 27,
+      "avg_speed_kmh": 33.3
+    },
     {
       "name": "晨间骑行",
       "date": "2026-09-06",
