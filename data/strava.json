@@ -1,16 +1,16 @@
 {
-  "updated_at": "2026-09-15T05:48:00Z",
+  "updated_at": "2026-09-15T11:04:03Z",
   "all_time": {
-    "distance_km": 7917.2,
-    "moving_time_h": 307.7,
-    "elevation_m": 31372,
-    "count": 278
+    "distance_km": 7963.7,
+    "moving_time_h": 309.3,
+    "elevation_m": 31466,
+    "count": 279
   },
   "ytd": {
-    "distance_km": 2552.1,
-    "moving_time_h": 94.2,
-    "elevation_m": 10857,
-    "count": 67
+    "distance_km": 2598.6,
+    "moving_time_h": 95.7,
+    "elevation_m": 10951,
+    "count": 68
   },
   "recent_4w": {
     "distance_km": 286.9,
@@ -18,6 +18,14 @@
   },
   "biggest_ride_km": 205.4,
   "recent_activities": [
+    {
+      "name": "AUTUMN",
+      "date": "2026-09-15",
+      "distance_km": 46.5,
+      "moving_time_h": 1.6,
+      "elevation_m": 94,
+      "avg_speed_kmh": 29.6
+    },
     {
       "name": "晨间骑行",
       "date": "2026-09-13",
@@ -33,14 +41,6 @@
       "moving_time_h": 1.2,
       "elevation_m": 27,
       "avg_speed_kmh": 33.3
-    },
-    {
-      "name": "晨间骑行",
-      "date": "2026-09-06",
-      "distance_km": 107.2,
-      "moving_time_h": 3.3,
-      "elevation_m": 304,
-      "avg_speed_kmh": 32.8
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
