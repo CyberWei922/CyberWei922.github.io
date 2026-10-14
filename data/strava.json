@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-14T11:10:36Z",
+  "updated_at": "2026-10-14T16:31:24Z",
   "all_time": {
     "distance_km": 8214.9,
     "moving_time_h": 319.3,
@@ -13,8 +13,8 @@
     "count": 74
   },
   "recent_4w": {
-    "distance_km": 251.2,
-    "count": 6
+    "distance_km": 168.4,
+    "count": 5
   },
   "biggest_ride_km": 205.4,
   "recent_activities": [
@@ -49,14 +49,6 @@
       "moving_time_h": 1.7,
       "elevation_m": 209,
       "avg_speed_kmh": 25.8
-    },
-    {
-      "name": "Afternoon Ride",
-      "date": "2026-09-19",
-      "distance_km": 27.9,
-      "moving_time_h": 1.0,
-      "elevation_m": 28,
-      "avg_speed_kmh": 27.1
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
