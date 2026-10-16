@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T15:11:36Z",
+  "updated_at": "2026-10-16T19:17:32Z",
   "all_time": {
     "distance_km": 8262.4,
     "moving_time_h": 321.0,
@@ -13,8 +13,8 @@
     "count": 76
   },
   "recent_4w": {
-    "distance_km": 199.8,
-    "count": 6
+    "distance_km": 215.9,
+    "count": 7
   },
   "biggest_ride_km": 205.4,
   "recent_activities": [
