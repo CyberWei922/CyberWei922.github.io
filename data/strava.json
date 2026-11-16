@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-16T07:38:37Z",
+  "updated_at": "2026-11-16T17:55:32Z",
   "all_time": {
     "distance_km": 8295.0,
     "moving_time_h": 322.7,
@@ -57,14 +57,6 @@
       "moving_time_h": 1.1,
       "elevation_m": 71,
       "avg_speed_kmh": 18.3
-    },
-    {
-      "name": "午后骑行",
-      "date": "2026-10-10",
-      "distance_km": 29.9,
-      "moving_time_h": 1.7,
-      "elevation_m": 97,
-      "avg_speed_kmh": 17.5
     }
   ],
   "strava_url": "https://www.strava.com/athletes/152238954"
